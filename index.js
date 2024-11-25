@@ -43,7 +43,7 @@ app.get('/w/:id', async (req, res) => {
         const videoData = response.data;
         console.log(videoData);
 
-        res.render('infowatch', { videoData });
+        res.render('infowatch', { videoData, videoId });
   } catch (error) {
         res.status(500).render('matte', { 
       videoId, 
@@ -60,7 +60,7 @@ app.get('/www/:id', async (req, res) => {
         const response = await axios.get(`https://watawatawata.glitch.me/api/${videoId}?token=wakameoishi`);
         const videoData = response.data;
 
-        res.render('highquo', { videoData });
+        res.render('highquo', { videoData, videoId });
   } catch (error) {
         res.status(500).render('matte', { 
       videoId, 
@@ -78,7 +78,7 @@ app.get('/ll/:id', async (req, res) => {
         const response = await axios.get(`https://watawatawata.glitch.me/api/${videoId}?token=wakameoishi`);
         const videoData = response.data;
 
-        res.render('listen', { videoData });
+        res.render('listen', { videoData, videoId });
    } catch (error) {
         res.status(500).render('matte', { 
       videoId, 
@@ -118,17 +118,36 @@ app.get('/umekomi/:id', async (req, res) => {
   }
 });
 
+app.get('/comment/:id', async (req, res) => {
+  const videoId = req.params.id;
+    try {
+        const response = await axios.get(`https://wakamecomment.glitch.me/api/wakame/${videoId}`);
+        const cm = response.data;
+
+        res.render('comment', { cm });
+   } catch (error) {
+        res.status(500).render('error', { 
+      videoId, 
+      error: 'コメントを取得できません', 
+      details: error.message 
+    });
+  }
+});
+
 // ホーム
 app.get("/", (req, res) => {
    const charge = axios.get(`https://watawatawata.glitch.me/`);
    res.sendFile(__dirname + "/views/index.html");
 });
 
+app.get('/st', (req, res) => {
+    res.sendStatus(200);
+});
+
 // サーチ
 app.get("/s", async (req, res) => {
 	let query = req.query.q;
 	let page = Number(req.query.p || 2);
-	const charge = axios.get(`https://watawatawata.glitch.me/`);
     let cookies = parseCookies(req);
     let wakames = cookies.wakames === 'true';
     if (wakames) {
@@ -173,7 +192,6 @@ app.get("/s", async (req, res) => {
 //プレイリスト
 app.get("/p/:id", async (req, res) => {
 	if (!req.params.id) return res.redirect("/");
-	const charge = axios.get(`https://watawatawata.glitch.me/`);
 	let page = Number(req.query.p || 1);
 	try {
 		res.render("playlist.ejs", {
@@ -193,7 +211,6 @@ app.get("/p/:id", async (req, res) => {
 app.get("/c/:id", async (req, res) => {
 	if (!req.params.id) return res.redirect("/");
 	let page = Number(req.query.p || 1);
-	const charge = axios.get(`https://watawatawata.glitch.me/`);
 	try {
 		res.render("channel.ejs", {
 			channel: await ytpl(req.params.id, { limit, pages: page }),
