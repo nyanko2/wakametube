@@ -53,7 +53,7 @@ app.get('/w/:id', async (req, res) => {
         const randomIndex = Math.floor(Math.random() * serverUrls['0'].length);
         baseUrl = serverUrls['0'][randomIndex];
     } else {
-        baseUrl = serverUrls[server] || 'https://wtserver1.glitch.me';
+        baseUrl = serverUrls[server] || 'https://douganyanko.glitch.me';
     }
   
     if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
@@ -104,7 +104,7 @@ app.get('/ll/:id', async (req, res) => {
   const videoId = req.params.id;
 
     try {
-        const response = await axios.get(`https://dougayoutube.glitch.me/api/${videoId}?token=nyanko_a`);
+        const response = await axios.get(`https://douganyanko.glitch.me/api/${videoId}?token=nyanko_a`);
         const videoData = response.data;
 
         res.render('listen', { videoData, videoId });
