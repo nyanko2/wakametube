@@ -90,7 +90,7 @@ app.get('/w/:id', async (req, res) => {
 app.get('/www/:id', async (req, res) => {
   const videoId = req.params.id;
     try {
-        const response = await axios.get(`https://dougayoutube.glitch.me/api/${videoId}?token=nyanko_a`);
+        const response = await axios.get(`https://douganyanko.glitch.me/api/${videoId}?token=nyanko_a`);
         const videoData = response.data;
 
         res.render('highquo', { videoData, videoId });
