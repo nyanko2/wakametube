@@ -40,7 +40,7 @@ app.get('/w/:id', async (req, res) => {
         'https://wtserver3.glitch.me',
         'https://wtserver1.glitch.me',
         'https://wtserver2.glitch.me',
-	'https://dougayoutube.glitch.me?token=nyanko_a',
+	'https://douganyanko.glitch.me',
         ],
         '1': 'https://wataamee.glitch.me',
         '2': 'https://watawatawata.glitch.me',
