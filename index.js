@@ -44,9 +44,7 @@ app.get('/w/:id', async (req, res) => {
         const videoData = response.data;
         console.log(videoData);
 
-        res.render('infowatch', { const videoId = req.params.id;
-    let cookies = parseCookies(req);
-    let wakames = cookies.wakametubeumekomi === 'true';videoData, videoId });
+        res.render('infowatch', { videoData, videoId });
   } catch (error) {
         res.status(500).render('matte', { 
       videoId,
